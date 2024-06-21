@@ -31,8 +31,19 @@ const fetchPendingEmails=async()=>{
         throw err;
     }
 }
+
+const updateTicket=async(ticketId,data)=>{
+    try{
+        const response=await repo.update(ticketId,data);
+        return response;
+    }catch(err){
+        console.log("error happened at service layer");
+        throw err;
+    }
+}
 module.exports={
     sendBasicMail,
     createNotification,
-    fetchPendingEmails
+    fetchPendingEmails,
+    updateTicket
 }

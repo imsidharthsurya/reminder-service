@@ -38,6 +38,19 @@ class TicketRepository{
             throw err;
         }
     }
+    async update(ticketId,data){
+        try{
+            const ticket=await NotificationTicket.findByPk(ticketId);
+            if(data.status){
+                ticket.status=data.status;
+            }
+            await ticket.save();
+            return ticket;
+        }catch(err){
+            console.log("error happenend at repository layer");
+            throw err;
+        }
+    }
 }
 
 module.exports=TicketRepository
