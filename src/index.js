@@ -1,15 +1,18 @@
 const express=require("express");
 const {PORT}=require("./config/serverConfig")
 
-const {sendBasicMail}=require("./services/email-service")
+const job=require("./utils/job")
+const apiRouter=require("./router/index")
 
 const setupAndStartServer=async()=>{
 
     const app=express();
     app.use(express.json())
 
+    app.use("/api",apiRouter)
     app.listen(PORT,()=>{
-        sendBasicMail('imsk@sid.com','imkavitamishra007@gmail.com','Testing mail send','it is working fine this is body of the mail.')
+        job();
+        //will fetch pending emails & send mail to those after every 2 minutes
         console.log(`server is running on port: ${PORT}`)
     })
 }
